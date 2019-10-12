@@ -120,7 +120,7 @@ namespace BattleShipCLI
             Console.Write("Press Enter to start...");
             Console.ReadKey();
 
-            // Not supported in Linux Mint!?
+            // Not supported in Linux Mint using Cinnamon/Gnome Terminal!?
             // Console.SetWindowSize(100, gameBoard.GetLength(0)+ 35);
 
             do
@@ -157,7 +157,6 @@ namespace BattleShipCLI
                             Console.Write(" ");
                         }
                     }
-                    
                 }
 
                 for (int i = 0; i < (gameBoard.GetLength(0)) * 2; i++)
@@ -166,31 +165,24 @@ namespace BattleShipCLI
                     
                     // Resetting interactIndex to 0 for a new interactLine.
                     interactIndex = 0;
-                    
 
-                    // varje ojämnt tal är en interactLine
+                    // Every uneven number is a interactLine.
                     if (i % 2 == 1)
                     {
                         // Draw a gameLine
-
                         for (int j = 0; j <= interactLine.Length; j++)
                         {
-                            
-
-                            // Kollar vart annat element för antingen interagera
-                            // eller avskiljning.
+                            // Checks every other element for either a delimiter or integration.
                             if (j % 2 == 0)
                             {
-
-                                // Var fjärde element ska vara en avskiljare
+                                // Every fourth element is a delimiter.
                                 if (j % 4 == 0)
                                 {
                                     Console.Write(separatorX);
                                 }
                                 else
                                 {
-                                    // Kontrollera om där finns något från
-                                    // inteactIndex.
+                                    // Is there something from interactIndex?
                                     Console.Write(gameBoard[interactLineCount, interactIndex]);
                                     interactIndex++;
                                 }
@@ -231,6 +223,7 @@ namespace BattleShipCLI
                     fireCoordinateX = GameInput();
                     Console.Write("[Y]>>");
                     fireCoordinateY = GameInput();
+
                     Console.Write("Torpedos away! At Coordinates: ");
                     Console.WriteLine(fireCoordinateX + "," + fireCoordinateY);
 
@@ -270,12 +263,14 @@ namespace BattleShipCLI
                 if (PlayerHasWon(ships, ship))
                 {
                     gameOn = false;
+                    Console.WriteLine("Victory is ours! The enemy has been extinguished!");
                 }
 
                 Console.ReadKey();
                 } while (gameOn);
 
-                Console.WriteLine("Victory is ours! The enemy has been extinguished!");
+                Console.WriteLine("Exiting game...");
+
                 Console.ReadKey();
         }
 
@@ -319,8 +314,7 @@ namespace BattleShipCLI
                 return false;
             }
         }
-        // Ett bra exempel på vart en strukt skulle vara lämplig.
-        // Man kan göra parameterlistor mycket kortare!
+
         public static char[,] UpdateGame(int x, int y, char[,] gameBoard, char marker, char[,] ships)
         {
             if (gameBoard[y, x] == ' ')
@@ -331,7 +325,6 @@ namespace BattleShipCLI
             }
             return gameBoard;
         }
-
 
         public static bool PlayerHasWon(char[,] ships, char marker)
         {
